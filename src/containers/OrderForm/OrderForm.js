@@ -19,7 +19,10 @@ export class OrderForm extends Component {
 
   handleIngredientChange = e => {
     e.preventDefault();
-    this.setState({ingredients: [...this.state.ingredients, e.target.name]});
+    const isExistingIngredient = this.state.ingredients.find( ingredient => ingredient === e.target.name);
+    if(!isExistingIngredient) {
+      this.setState({ingredients: [...this.state.ingredients, e.target.name]});
+    }
   }
 
   handleSubmit = e => {
