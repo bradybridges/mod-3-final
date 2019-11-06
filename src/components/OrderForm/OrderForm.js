@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addOrder, getOrders } from '../../apiCalls';
+import { setOrders } from '../../actions/index';
 
 class OrderForm extends Component {
   constructor(props) {
@@ -21,6 +24,14 @@ class OrderForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    const { name, ingredients } = this.state;
+    if(name && ingredients.length) {
+      addOrder(name, ingredients)
+      .then( data => data.json())
+      .then(json => {
+        this.props.setOrders([...this.props.orders, { name, ingredients, id: json.id }]);
+      });
+    }
     this.clearInputs();
   }
 
@@ -60,4 +71,12 @@ class OrderForm extends Component {
   }
 }
 
-export default OrderForm;
+export const mapDispatchToProps = dispatch => ({
+  setOrders: orders => dispatch(setOrders(orders)),
+});
+
+export const mapStateToProps = state => ({
+  orders: state.orders,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrderForm);
