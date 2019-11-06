@@ -18,6 +18,12 @@ exports[`Orders should match the snapshot 1`] = `
         lettuce
       </li>
     </ul>
+    <button
+      id="Brady"
+      onClick={[Function]}
+    >
+      Delete
+    </button>
   </div>
   <div
     className="order"
@@ -45,6 +51,12 @@ exports[`Orders should match the snapshot 1`] = `
         cheese
       </li>
     </ul>
+    <button
+      id="Alan"
+      onClick={[Function]}
+    >
+      Delete
+    </button>
   </div>
 </section>
 `;
