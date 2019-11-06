@@ -16,7 +16,6 @@ export const addOrder = async (name, ingredients) => {
   }; 
   
   const result = await fetch('http://localhost:3001/api/v1/orders', options);
-  console.log(result);
   return result;
 }
 

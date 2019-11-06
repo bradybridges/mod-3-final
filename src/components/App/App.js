@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Orders from '../../containers/Orders/Orders';
-import OrderForm from '../OrderForm/OrderForm';
+import OrderForm from '../../containers/OrderForm/OrderForm';
 
 export const App = (props) =>  {
   return (
