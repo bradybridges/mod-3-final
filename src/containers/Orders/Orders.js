@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setOrders } from '../../actions/index';
-import { getOrders } from '../../apiCalls';
+import { getOrders, deleteOrder } from '../../apiCalls';
 import './Orders.css';
 
 export class Orders extends Component {
@@ -11,6 +11,16 @@ export class Orders extends Component {
     getOrders()
       .then(data => this.props.setOrders(data.orders))
       .catch(err => console.error('Error fetching:', err));
+  }
+
+  handleDelete = (e) => {
+    e.preventDefault();
+    const order = this.props.orders.find(order => order.name === e.target.id);
+    const orderIndex = this.props.orders.findIndex(order => order.name === e.target.id);
+    let updatedOrders = this.props.orders.map( order => order);
+    updatedOrders.splice(orderIndex, 1);
+    deleteOrder(order.id);
+    this.props.setOrders(updatedOrders);
   }
 
   render() {
@@ -23,6 +33,7 @@ export class Orders extends Component {
               return <li key={ingredient}>{ingredient}</li>
             })}
           </ul>
+          <button id={order.name} onClick={this.handleDelete}>Delete</button>
         </div>
       )
     });

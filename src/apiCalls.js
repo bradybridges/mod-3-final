@@ -19,4 +19,14 @@ export const addOrder = async (name, ingredients) => {
   return result;
 }
 
+export const deleteOrder = (id) => {
+  const options = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+  fetch(`http://localhost:3001/api/v1/orders/${id}`, options);
+}
+
 
