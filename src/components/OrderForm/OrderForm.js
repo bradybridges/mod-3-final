@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addOrder, getOrders } from '../../apiCalls';
+import { addOrder } from '../../apiCalls';
 import { setOrders } from '../../actions/index';
 
 class OrderForm extends Component {
@@ -29,7 +29,9 @@ class OrderForm extends Component {
       addOrder(name, ingredients)
       .then( data => data.json())
       .then(json => {
-        this.props.setOrders([...this.props.orders, { name, ingredients, id: json.id }]);
+        if(json.id) {
+          this.props.setOrders([...this.props.orders, { name, ingredients, id: json.id }]);
+        }
       });
     }
     this.clearInputs();
